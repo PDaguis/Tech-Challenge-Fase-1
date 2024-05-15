@@ -1,5 +1,6 @@
 ﻿using Fase1.Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,21 @@ namespace Fase1.Infra.Context
 
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Regiao> Regioes { get; set; }
+
+        public ApplicationDbContext()
+        {
+            //IConfiguration configuration = new ConfigurationBuilder()
+            //    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            //    .AddJsonFile("appsettings.json")
+            //    .Build();
+
+            //_connectionString = configuration.GetConnectionString("DefaultConnection");
+        }
+
+        public ApplicationDbContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

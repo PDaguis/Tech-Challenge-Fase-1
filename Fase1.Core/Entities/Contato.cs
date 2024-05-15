@@ -11,6 +11,7 @@ namespace Fase1.Core.Entities
         public required string Nome { get; set; }
         public required string Telefone { get; set; }
         public required string Email { get; set; }
-        public virtual required Regiao Regiao { get; set; }
+        public int RegiaoId { get; set; }
+        public virtual Regiao Regiao { get; set; }
     }
 }
