@@ -1,4 +1,5 @@
 ﻿using Fase1.API.DTO.Inputs;
+using Fase1.API.DTO.Results;
 using Fase1.Core.Entities;
 using Fase1.Core.Interfaces;
 using Fase1.Infra.Repositories;
@@ -54,7 +55,19 @@ namespace Fase1.API.Controllers
                 if (regioes == null)
                     return NotFound();
 
-                return Ok(regioes);
+                var lista = new List<RegiaoResult>();
+
+                foreach (var item in regioes)
+                {
+                    lista.Add(new RegiaoResult()
+                    {
+                        Id = item.Id,
+                        Nome = item.Nome,
+                        DDD = item.DDD
+                    });
+                }
+
+                return Ok(lista);
             }
             catch (Exception e)
             {

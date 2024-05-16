@@ -1,0 +1,64 @@
+﻿@page
+@model Fase1.Web.Pages.Contato.IndexModel
+@{
+    ViewData["Title"] = "Contatos";
+}
+
+<h1>Lista de contatos</h1>
+
+<div class="form-group">
+    <form method="get">
+        <div class="form-group">
+            <label for="searchDDD">Buscar por DDD:</label>
+            <input type="text" name="searchDDD" value="@Model.SearchDDD" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Buscar" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <p>
+        <a asp-page="./Create" class="btn btn-primary">Cadastrar novo</a>
+    </p>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Contatos[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contatos[0].Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contatos[0].Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contatos[0].Email)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Contatos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <a asp-page="./Editar" asp-route-id="@item.Id">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

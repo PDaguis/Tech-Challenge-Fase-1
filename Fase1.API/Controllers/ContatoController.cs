@@ -1,4 +1,5 @@
 ﻿using Fase1.API.DTO.Inputs;
+using Fase1.API.DTO.Results;
 using Fase1.Core.Entities;
 using Fase1.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -54,7 +55,20 @@ namespace Fase1.API.Controllers
                 if (contatos == null)
                     return NotFound();
 
-                return Ok(contatos);
+                var lista = new List<ContatoResult>();
+
+                foreach (var item in contatos)
+                {
+                    lista.Add(new ContatoResult()
+                    {
+                        Id = item.Id,
+                        Nome = item.Nome,
+                        Email = item.Email,
+                        Telefone = item.Telefone
+                    });
+                }
+
+                return Ok(lista);
             }
             catch (Exception e)
             {
@@ -68,7 +82,7 @@ namespace Fase1.API.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public IActionResult GetAll(string ddd)
+        public IActionResult GetContatosPorDDD(string ddd)
         {
             try
             {
@@ -77,7 +91,26 @@ namespace Fase1.API.Controllers
                 if (contatos == null)
                     return NotFound();
 
-                return Ok(contatos);
+                var lista = new List<ContatoPorDDDResult>();
+
+                foreach (var item in contatos)
+                {
+                    lista.Add(new ContatoPorDDDResult()
+                    {
+                        Id = item.Id,
+                        Nome = item.Nome,
+                        Email = item.Email,
+                        Telefone = item.Telefone,
+                        Regiao = new RegiaoResult()
+                        {
+                            Id = item.Regiao.Id,
+                            Nome = item.Regiao.Nome,
+                            DDD = item.Regiao.DDD
+                        }
+                    });
+                }
+
+                return Ok(lista);
             }
             catch (Exception e)
             {

@@ -1,0 +1,55 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1>Lista de regiões</h1>
+
+@* <form asp-action="Index" method="get">
+    <div class="form-group">
+        <label for="searchDDD">Filter by DDD:</label>
+        <input type="text" name="searchDDD" value="@Model.SearchDDD" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Filter" class="btn btn-primary" />
+    </div>
+</form> *@
+
+<p>
+    <a asp-page="Regiao/Create" class="btn btn-primary">Cadastrar nova</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Regioes[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Regioes[0].Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Regioes[0].DDD)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Regioes)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DDD)
+            </td>
+            <td>
+                <a asp-page="Regiao/Edit" asp-route-id="@item.Id">Editar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

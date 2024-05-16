@@ -1,0 +1,42 @@
+﻿@page
+@model Fase1.Web.Pages.Regiao.CreateModel
+@{
+    ViewData["Title"] = "Cadastrar Região";
+}
+
+<h1>Cadastrar</h1>
+
+<h4>Região</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Regiao.Nome" class="control-label"></label>
+                <input asp-for="Regiao.Nome" class="form-control" />
+                <span asp-validation-for="Regiao.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Regiao.DDD" class="control-label"></label>
+                <input asp-for="Regiao.DDD" class="form-control" />
+                <span asp-validation-for="Regiao.DDD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Index">Voltar para regiões</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
