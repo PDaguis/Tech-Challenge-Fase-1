@@ -16,6 +16,7 @@ namespace Fase1.Infra.Configurations
             builder.ToTable("Regiao");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).HasColumnType("INT").UseIdentityColumn();
+            builder.Property(x => x.CadastradoEm).HasColumnType("DATETIME").IsRequired();
             builder.Property(x => x.Nome).HasColumnType("VARCHAR(300)").IsRequired();
             builder.Property(x => x.DDD).HasColumnType("VARCHAR(3)").IsRequired();
             builder.HasMany(r => r.Contatos)

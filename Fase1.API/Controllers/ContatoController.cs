@@ -63,7 +63,7 @@ namespace Fase1.API.Controllers
             
         }
 
-        [HttpGet("/ddd/{ddd}")]
+        [HttpGet("ddd/{ddd}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]

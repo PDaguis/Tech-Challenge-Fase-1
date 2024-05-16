@@ -8,9 +8,10 @@ namespace Fase1.Core.Entities
 {
     public abstract class EntityBase
     {
-        protected EntityBase()
+        public static DateTime CurrentBrazilianDateTime => TimeZoneInfo.ConvertTime(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time"));
+        public EntityBase()
         {
-            CadastradoEm = DateTime.Now;
+            CadastradoEm = CurrentBrazilianDateTime;
         }
 
         public int Id { get; set; }
