@@ -45,7 +45,7 @@ namespace Fase1.Web.Pages.Contato
         {
             var regioes = await _regiaoService.GetRegioes();
 
-            Regioes = new SelectList(regioes, nameof(RegiaoResult.Id), nameof(RegiaoResult.Nome));
+            Regioes = new SelectList(regioes, nameof(RegiaoResult.Id), nameof(RegiaoResult.DDD));
         }
     }
 }

@@ -34,5 +34,14 @@ namespace Fase1.Web.Pages.Contato
                 Contatos.Add(contato);
             }
         }
+
+        public async Task<IActionResult> OnPostDelete(int id)
+        {
+            await _contatoService.Excluir(id);
+
+            OnGet();
+
+            return Page();
+        }
     }
 }

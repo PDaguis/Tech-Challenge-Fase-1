@@ -16,6 +16,25 @@ namespace Fase1.Web.Services
             _httpClient = httpClient;
         }
 
+        public bool Atualizar(RegiaoPut regiao)
+        {
+            try
+            {
+                var jsonRequest = new StringContent(JsonSerializer.Serialize(regiao), Encoding.UTF8, Application.Json);
+
+                var response = _httpClient.PutAsync("Regiao", jsonRequest).Result.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode)
+                    return true;
+
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public bool Cadastrar(RegiaoPost regiao)
         {
             try
@@ -32,6 +51,40 @@ namespace Fase1.Web.Services
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        public async Task Excluir(int id)
+        {
+            try
+            {
+                await _httpClient.DeleteAsync($"Regiao/{id}");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<RegiaoResult> GetRegiaoPorId(int id)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"Regiao/{id}");
+
+                if (!response.IsSuccessStatusCode)
+                    return null;
+
+                var jsonResult = await response.Content.ReadAsStringAsync();
+
+                var data = JsonSerializer.Deserialize<RegiaoResult>(jsonResult);
+
+                return data;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
 
@@ -52,8 +105,7 @@ namespace Fase1.Web.Services
             }
             catch (Exception e)
             {
-
-                throw;
+                return null;
             }
         }
     }

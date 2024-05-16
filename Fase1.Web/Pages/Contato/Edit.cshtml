@@ -1,0 +1,41 @@
+﻿@page "{id:int}"
+@model Fase1.Web.Pages.Contato.EditModel
+@{
+    ViewData["Title"] = "Editar - Contato";
+}
+
+<h1>@Model.Id</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="ContatoEdit.Nome" class="control-label"></label>
+        <input asp-for="ContatoEdit.Nome" class="form-control" value="@Model.ContatoEdit.Nome" />
+        <span asp-validation-for="ContatoEdit.Nome" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ContatoEdit.Telefone" class="control-label"></label>
+        <input asp-for="ContatoEdit.Telefone" class="form-control" value="@Model.ContatoEdit.Telefone" />
+        <span asp-validation-for="ContatoEdit.Telefone" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ContatoEdit.Email" class="control-label"></label>
+        <input asp-for="ContatoEdit.Email" class="form-control" value="@Model.ContatoEdit.Email" />
+        <span asp-validation-for="ContatoEdit.Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <select asp-for="RegiaoId" asp-items="Model.Regioes" class="form-select">
+            <option value="0" class="form-control">Selecione uma região</option>
+        </select>
+    </div>
+
+    @Html.HiddenFor(model => model.ContatoEdit.Id)
+    <button type="submit" class="btn btn-primary">Editar</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -28,10 +28,19 @@ namespace Fase1.API.Controllers
         {
             try
             {
-                var contato = _contatoRepository.GetById(id);
+                var obj = _contatoRepository.GetById(id);
 
-                if (contato == null)
+                if (obj == null)
                     return NotFound();
+
+                var contato = new ContatoResult()
+                {
+                    Id = obj.Id,
+                    Nome = obj.Nome,
+                    Email = obj.Email,
+                    Telefone = obj.Telefone,
+                    RegiaoId = obj.RegiaoId
+                };
 
                 return Ok(contato);
             }
@@ -163,6 +172,7 @@ namespace Fase1.API.Controllers
                 contato.Nome = input.Nome;
                 contato.Telefone = input.Telefone;
                 contato.Email = input.Email;
+                contato.RegiaoId = input.RegiaoId;
 
                 _contatoRepository.Atualizar(contato);
 

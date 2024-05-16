@@ -28,10 +28,17 @@ namespace Fase1.API.Controllers
         {
             try
             {
-                var regiao = _regiaoRepository.GetById(id);
+                var obj = _regiaoRepository.GetById(id);
 
-                if (regiao == null)
+                if (obj == null)
                     return NotFound();
+
+                var regiao = new RegiaoResult()
+                {
+                    Id = obj.Id,
+                    Nome = obj.Nome,
+                    DDD = obj.DDD
+                };
 
                 return Ok(regiao);
             }

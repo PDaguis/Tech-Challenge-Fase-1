@@ -15,5 +15,8 @@ namespace Fase1.Web.DTO.Results
 
         [JsonPropertyName("email")]
         public string Email { get; set; }
+
+        [JsonPropertyName("regiaoId")]
+        public int RegiaoId { get; set; }
     }
 }

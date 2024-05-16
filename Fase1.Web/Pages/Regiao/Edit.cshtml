@@ -1,6 +1,27 @@
 ﻿@page "{id:int}"
 @model Fase1.Web.Pages.Regiao.EditModel
 @{
+    ViewData["Title"] = "Editar - Região";
 }
 
-<h1>@Model.Id</h1>
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="RegiaoEdit.Nome" class="control-label"></label>
+        <input asp-for="RegiaoEdit.Nome" class="form-control" value="@Model.RegiaoEdit.Nome" />
+        <span asp-validation-for="RegiaoEdit.Nome" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="RegiaoEdit.DDD" class="control-label"></label>
+        <input asp-for="RegiaoEdit.DDD" class="form-control" value="@Model.RegiaoEdit.DDD" />
+        <span asp-validation-for="RegiaoEdit.DDD" class="text-danger"></span>
+    </div>
+    @Html.HiddenFor(model => model.RegiaoEdit.Id)
+    <button type="submit" class="btn btn-primary">Editar</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

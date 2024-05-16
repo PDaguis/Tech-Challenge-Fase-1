@@ -20,6 +20,20 @@ namespace Fase1.Web.Pages
 
         public async void OnGet()
         {
+            Regioes = await GetRegioes();
+        }
+
+        public async Task<IActionResult> OnPostDelete(int id)
+        {
+            await _regiaoService.Excluir(id);
+
+            Regioes = await GetRegioes();
+
+            return Page();
+        }
+
+        public async Task<List<RegiaoResult>> GetRegioes()
+        {
             Regioes = new List<RegiaoResult>();
             var regioes = await _regiaoService.GetRegioes();
 
@@ -27,6 +41,8 @@ namespace Fase1.Web.Pages
             {
                 Regioes.Add(regiao);
             }
+
+            return [.. Regioes];
         }
     }
 }

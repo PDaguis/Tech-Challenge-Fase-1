@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fase1.Core", "Fase1.Core\Fa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fase1.Tests", "Fase1.Tests\Fase1.Tests.csproj", "{AA862DFE-DF21-4865-AC8F-EF2E1D25B951}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fase1.Web", "Fase1.Web\Fase1.Web.csproj", "{0C766FFF-4795-430D-8795-9315FFDFA916}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fase1.Web", "Fase1.Web\Fase1.Web.csproj", "{0C766FFF-4795-430D-8795-9315FFDFA916}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

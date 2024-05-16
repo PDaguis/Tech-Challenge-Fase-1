@@ -1,6 +1,7 @@
 ﻿@page
 @model Fase1.Web.Pages.Contato.CreateModel
 @{
+    ViewData["Title"] = "Cadastrar - Contatos";
 }
 
 <h1>Cadastrar novo contato</h1>
@@ -27,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="RegiaoId" class="control-label"></label>
-                <select asp-for="RegiaoId" class="form-control" asp-items="@Model.Regioes">
+                <select asp-for="RegiaoId" class="form-select" asp-items="@Model.Regioes">
                     <option value="0">Selecione uma região</option>
                 </select>
                 <span asp-validation-for="RegiaoId" class="text-danger"></span>
