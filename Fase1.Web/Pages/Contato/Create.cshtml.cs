@@ -4,6 +4,7 @@ using Fase1.Web.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
 
 namespace Fase1.Web.Pages.Contato
 {
@@ -45,7 +46,9 @@ namespace Fase1.Web.Pages.Contato
         {
             var regioes = await _regiaoService.GetRegioes();
 
-            Regioes = new SelectList(regioes, nameof(RegiaoResult.Id), nameof(RegiaoResult.DDD));
+            //Regioes = new SelectList(regioes, nameof(RegiaoResult.Id), nameof(RegiaoResult.DDD));
+
+            Regioes = new SelectList(regioes.ToDictionary(x => x.Id, y => y.DDD + " - " + y.Nome), "Key", "Value");
         }
     }
 }

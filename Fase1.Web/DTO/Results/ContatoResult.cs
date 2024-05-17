@@ -18,5 +18,8 @@ namespace Fase1.Web.DTO.Results
 
         [JsonPropertyName("regiaoId")]
         public int RegiaoId { get; set; }
+
+        [JsonPropertyName("cadastradoEm")]
+        public DateTime CadastradoEm { get; set; }
     }
 }

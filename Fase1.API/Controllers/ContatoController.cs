@@ -39,6 +39,7 @@ namespace Fase1.API.Controllers
                     Nome = obj.Nome,
                     Email = obj.Email,
                     Telefone = obj.Telefone,
+                    CadastradoEm = obj.CadastradoEm,
                     RegiaoId = obj.RegiaoId
                 };
 
@@ -73,7 +74,8 @@ namespace Fase1.API.Controllers
                         Id = item.Id,
                         Nome = item.Nome,
                         Email = item.Email,
-                        Telefone = item.Telefone
+                        Telefone = item.Telefone,
+                        CadastradoEm = item.CadastradoEm
                     });
                 }
 
@@ -110,6 +112,7 @@ namespace Fase1.API.Controllers
                         Nome = item.Nome,
                         Email = item.Email,
                         Telefone = item.Telefone,
+                        CadastradoEm = item.CadastradoEm,
                         Regiao = new RegiaoResult()
                         {
                             Id = item.Regiao.Id,

@@ -37,7 +37,9 @@ namespace Fase1.Web.Pages.Contato
 
             RegiaoId = ContatoEdit.RegiaoId;
 
-            Regioes = new SelectList(regioes, nameof(RegiaoResult.Id), nameof(RegiaoResult.Nome));
+            //Regioes = new SelectList(regioes, nameof(RegiaoResult.Id), nameof(RegiaoResult.DDD));
+
+            Regioes = new SelectList(regioes.ToDictionary(x => x.Id, y => y.DDD + " - " + y.Nome), "Key", "Value");
         }
 
         public async Task<IActionResult> OnPost() 
