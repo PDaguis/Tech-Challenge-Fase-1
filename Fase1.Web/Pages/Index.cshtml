@@ -15,10 +15,10 @@
             <th>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Regioes[0].Nome)
+                @Html.DisplayNameFor(model => model.Regioes[0].DDD)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Regioes[0].DDD)
+                @Html.DisplayNameFor(model => model.Regioes[0].Nome)
             </th>
             <th>Ações</th>
         </tr>
@@ -31,10 +31,10 @@
                     @Html.HiddenFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
+                    @Html.DisplayFor(modelItem => item.DDD)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DDD)
+                    @Html.DisplayFor(modelItem => item.Nome)
                 </td>
                 <td style="display:flex;flex-direction:row;justify-content:space-between;">
                     <a asp-page="Regiao/Edit" asp-route-id="@item.Id" class="btn btn-primary">
