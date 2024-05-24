@@ -16,6 +16,11 @@ namespace Fase1.Infra.Repositories
         {
         }
 
+        /// <summary>
+        /// Método para retornar os contatos referentes ao DDD da Região informado
+        /// </summary>
+        /// <param name="ddd">DDD da Região</param>
+        /// <returns>Todos os contatos por DDD</returns>
         public IEnumerable<Contato> GetContatosPorDDD(string ddd)
         {
             var contatos = _context.Contatos

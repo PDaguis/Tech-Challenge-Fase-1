@@ -19,6 +19,11 @@ namespace Fase1.API.Controllers
             _contatoRepository = contatoRepository;
         }
 
+        /// <summary>
+        /// Endpoint para retornar o objeto de Contato por código Id
+        /// </summary>
+        /// <param name="id">Código identificador do Contato</param>
+        /// <returns>Retorna o objeto Contato identificado pelo Id informado</returns>
         [HttpGet("{id:int}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -51,6 +56,10 @@ namespace Fase1.API.Controllers
             }
         }
 
+        /// <summary>
+        ///  Endpoint para retornar todos os contatos
+        /// </summary>
+        /// <returns>Retorna todos os contatos</returns>
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -88,6 +97,11 @@ namespace Fase1.API.Controllers
             
         }
 
+        /// <summary>
+        /// Endpoint para retornar os contatos por Região, mais especificamente, por DDD
+        /// </summary>
+        /// <param name="ddd">DDD da Região</param>
+        /// <returns>Contatos por Região</returns>
         [HttpGet("ddd/{ddd}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -131,11 +145,16 @@ namespace Fase1.API.Controllers
 
         }
 
+        /// <summary>
+        /// Endpoint para cadastro de Contato
+        /// </summary>
+        /// <param name="input">Objeto Contato</param>
+        /// <returns></returns>
+        /// <response code="201">Sucesso no cadastro do contato</response>
+        /// <response code="400">Erro na requisição</response>
         [HttpPost]
         [ProducesResponseType(201)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        [ProducesResponseType(500)]
         public IActionResult Post([FromBody] ContatoPost input)
         {
             try
@@ -158,11 +177,18 @@ namespace Fase1.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Endpoint para atualização do Contato
+        /// </summary>
+        /// <param name="input">Objeto contato com informações atualizadas</param>
+        /// <returns></returns>
+        /// <response code="200">Sucesso na atualização do contato</response>
+        /// <response code="404">Contato não encontrado</response>
+        /// <response code="400">Erro na requisição</response>
         [HttpPut]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        [ProducesResponseType(500)]
         public IActionResult Put([FromBody] ContatoPut input)
         {
             try
@@ -187,6 +213,14 @@ namespace Fase1.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Endpoint para excluir um contato
+        /// </summary>
+        /// <param name="id">Código identificados do contato</param>
+        /// <returns></returns>
+        /// <response code="200">Sucesso na exclusão do contato</response>
+        /// <response code="404">Contato não encontrado</response>
+        /// <response code="400">Erro na requisição</response>
         [HttpDelete("{id:int}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]

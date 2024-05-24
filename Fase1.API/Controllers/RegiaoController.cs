@@ -19,11 +19,15 @@ namespace Fase1.API.Controllers
             _regiaoRepository = regiaoRepository;
         }
 
+        /// <summary>
+        /// Endpoint para retornar o objeto de Região por código Id
+        /// </summary>
+        /// <param name="id">Código identificador da Região</param>
+        /// <returns>Retorna o objeto Região identificado pelo Id informado</returns>
         [HttpGet("{id:int}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        [ProducesResponseType(500)]
         public IActionResult GetById([FromRoute] int id)
         {
             try
@@ -48,11 +52,14 @@ namespace Fase1.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Endpoint para retornar todas as regiões
+        /// </summary>
+        /// <returns>Retorna todas as regiões</returns>
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        [ProducesResponseType(500)]
         public IActionResult GetAll()
         {
             try
@@ -83,11 +90,16 @@ namespace Fase1.API.Controllers
 
         }
 
+        /// <summary>
+        /// Endpoint para cadastro de Região
+        /// </summary>
+        /// <param name="input">Objeto Região</param>
+        /// <returns></returns>
+        /// <response code="201">Sucesso no cadastro da região</response>
+        /// <response code="400">Erro na requisição</response>
         [HttpPost]
         [ProducesResponseType(201)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        [ProducesResponseType(500)]
         public IActionResult Post([FromBody] RegiaoPost input)
         {
             try
@@ -108,6 +120,14 @@ namespace Fase1.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Endpoint para atualização da Região
+        /// </summary>
+        /// <param name="input">Objeto região com informações atualizadas</param>
+        /// <returns></returns>
+        /// <response code="200">Sucesso na atualização da região</response>
+        /// <response code="404">Região não encontrada</response>
+        /// <response code="400">Erro na requisição</response>
         [HttpPut]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -135,6 +155,14 @@ namespace Fase1.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Endpoint para excluir uma região
+        /// </summary>
+        /// <param name="id">Código identificados da região</param>
+        /// <returns></returns>
+        /// <response code="200">Sucesso na exclusão da região</response>
+        /// <response code="404">Região não encontrada</response>
+        /// <response code="400">Erro na requisição</response>
         [HttpDelete("{id:int}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
