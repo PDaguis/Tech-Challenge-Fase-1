@@ -13,10 +13,12 @@ namespace Fase1.API.Controllers
     public class ContatoController : ControllerBase
     {
         private readonly IContatoRepository _contatoRepository;
+        private readonly ILogger<ContatoController> _logger;
 
-        public ContatoController(IContatoRepository contatoRepository)
+        public ContatoController(IContatoRepository contatoRepository, ILogger<ContatoController> logger)
         {
             _contatoRepository = contatoRepository;
+            _logger = logger;
         }
 
         /// <summary>
@@ -33,11 +35,16 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Obtendo contato por id...");
                 var obj = _contatoRepository.GetById(id);
 
                 if (obj == null)
+                {
+                    _logger.LogInformation("Contato não encontrado");
                     return NotFound();
-
+                }
+                
+                _logger.LogInformation("Construindo objeto de contato...");
                 var contato = new ContatoResult()
                 {
                     Id = obj.Id,
@@ -48,10 +55,12 @@ namespace Fase1.API.Controllers
                     RegiaoId = obj.RegiaoId
                 };
 
+                _logger.LogInformation("Retornando contato...");
                 return Ok(contato);
             }
             catch (Exception e)
             {
+                _logger.LogError($"Erro na requisição: {e.Message}");
                 return BadRequest(e);
             }
         }
@@ -69,13 +78,18 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Obtendo contatos...");
                 var contatos = _contatoRepository.GetAll();
 
                 if (contatos == null)
+                {
+                    _logger.LogInformation("Contatos não encontrados");
                     return NotFound();
+                }
 
                 var lista = new List<ContatoResult>();
 
+                _logger.LogInformation("Construindo objetos...");
                 foreach (var item in contatos)
                 {
                     lista.Add(new ContatoResult()
@@ -88,13 +102,14 @@ namespace Fase1.API.Controllers
                     });
                 }
 
+                _logger.LogInformation("Retornando contatos...");
                 return Ok(lista);
             }
             catch (Exception e)
             {
+                _logger.LogError($"Erro na requisição: {e.Message}");
                 return BadRequest(e);
             }
-            
         }
 
         /// <summary>
@@ -111,13 +126,18 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Obtendo contatos...");
                 var contatos = _contatoRepository.GetContatosPorDDD(ddd);
 
                 if (contatos == null)
+                {
+                    _logger.LogInformation("Contatos não encontrados...");
                     return NotFound();
+                }
 
                 var lista = new List<ContatoPorDDDResult>();
 
+                _logger.LogInformation("Construindo objetos de contato...");
                 foreach (var item in contatos)
                 {
                     lista.Add(new ContatoPorDDDResult()
@@ -136,10 +156,12 @@ namespace Fase1.API.Controllers
                     });
                 }
 
+                _logger.LogInformation("Retornando contatos...");
                 return Ok(lista);
             }
             catch (Exception e)
             {
+                _logger.LogError($"Erro na requisição: {e.Message}");
                 return BadRequest(e);
             }
 
@@ -159,6 +181,7 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Construindo objeto de contato...");
                 var contato = new Contato()
                 {
                     Nome = input.Nome,
@@ -167,12 +190,15 @@ namespace Fase1.API.Controllers
                     RegiaoId = input.RegiaoId
                 };
 
+                _logger.LogInformation("Cadastrando contato...");
                 _contatoRepository.Cadastrar(contato);
 
+                _logger.LogInformation("Contato cadastrado");
                 return Created();
             }
             catch (Exception e)
             {
+                _logger.LogError($"Erro na requisição: {e.Message}");
                 return BadRequest(e);
             }
         }
@@ -193,22 +219,30 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Obtendo contato...");
                 var contato = _contatoRepository.GetById(input.Id);
 
                 if (contato == null)
+                {
+                    _logger.LogInformation("Contato não encontrado");
                     return NotFound();
+                }
 
+                _logger.LogInformation("Construindo objeto para atualização...");
                 contato.Nome = input.Nome;
                 contato.Telefone = input.Telefone;
                 contato.Email = input.Email;
                 contato.RegiaoId = input.RegiaoId;
 
+                _logger.LogInformation("Atualizando contato...");
                 _contatoRepository.Atualizar(contato);
 
+                _logger.LogInformation("Contato atualizado");
                 return Ok();
             }
             catch (Exception e)
             {
+                _logger.LogError($"Erro na requisição: {e.Message}");
                 return BadRequest(e);
             }
         }
@@ -230,17 +264,24 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Obtendo contato por id...");
                 var contato = _contatoRepository.GetById(id);
 
                 if (contato == null)
+                {
+                    _logger.LogInformation("Contato não encontrado");
                     return NotFound();
+                }
 
+                _logger.LogInformation("Excluindo contato...");
                 _contatoRepository.Excluir(id);
 
+                _logger.LogInformation("Contato excluído");
                 return Ok();
             }
             catch (Exception e)
             {
+                _logger.LogError($"Erro na requisição: {e.Message}");
                 return BadRequest(e);
             }
         }

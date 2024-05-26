@@ -1,3 +1,4 @@
+using Fase1.API.Logging;
 using Fase1.Core.Interfaces;
 using Fase1.Infra.Context;
 using Fase1.Infra.Repositories;
@@ -21,6 +22,9 @@ builder.Services.AddSwaggerGen(c =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
 });
+
+builder.Logging.ClearProviders();
+builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration() { LogLevel = LogLevel.Information }));
 
 var stringConexao = configuration.GetConnectionString("DefaultConnection");
 

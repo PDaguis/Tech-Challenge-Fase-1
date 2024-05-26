@@ -13,10 +13,12 @@ namespace Fase1.API.Controllers
     public class RegiaoController : ControllerBase
     {
         private readonly IRegiaoRepository _regiaoRepository;
+        private readonly ILogger<ContatoController> _logger;
 
-        public RegiaoController(IRegiaoRepository regiaoRepository)
+        public RegiaoController(IRegiaoRepository regiaoRepository, ILogger<ContatoController> logger)
         {
             _regiaoRepository = regiaoRepository;
+            _logger = logger;
         }
 
         /// <summary>
@@ -32,11 +34,16 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Obtendo região por id...");
                 var obj = _regiaoRepository.GetById(id);
 
                 if (obj == null)
+                {
+                    _logger.LogInformation("Região não encontrada");
                     return NotFound();
+                }
 
+                _logger.LogInformation("Construindo objeto de região...");
                 var regiao = new RegiaoResult()
                 {
                     Id = obj.Id,
@@ -44,10 +51,12 @@ namespace Fase1.API.Controllers
                     DDD = obj.DDD
                 };
 
+                _logger.LogInformation("Retornando objeto de região...");
                 return Ok(regiao);
             }
             catch (Exception e)
             {
+                _logger.LogError($"Erro na requisição: {e.Message}");
                 return BadRequest(e);
             }
         }
@@ -64,13 +73,18 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Obtendo regiões...");
                 var regioes = _regiaoRepository.GetAll();
 
                 if (regioes == null)
+                {
+                    _logger.LogInformation("Regiões não encontradas");
                     return NotFound();
+                }
 
                 var lista = new List<RegiaoResult>();
 
+                _logger.LogInformation("Construindo objetos de região...");
                 foreach (var item in regioes)
                 {
                     lista.Add(new RegiaoResult()
@@ -81,10 +95,12 @@ namespace Fase1.API.Controllers
                     });
                 }
 
+                _logger.LogInformation("Retornando regiões...");
                 return Ok(lista);
             }
             catch (Exception e)
             {
+                _logger.LogError($"Erro na requisição: {e.Message}");
                 return BadRequest(e);
             }
 
@@ -104,18 +120,22 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Construindo objeto de região...");
                 var regiao = new Regiao()
                 {
                     Nome = input.Nome,
                     DDD = input.DDD
                 };
 
+                _logger.LogInformation("Cadastrando região...");
                 _regiaoRepository.Cadastrar(regiao);
 
+                _logger.LogInformation("Região cadastrada");
                 return Created();
             }
             catch (Exception e)
             {
+                _logger.LogError($"Erro na requisição: {e.Message}");
                 return BadRequest(e);
             }
         }
@@ -137,20 +157,28 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Obtendo região por id...");
                 var regiao = _regiaoRepository.GetById(input.Id);
 
                 if (regiao == null)
+                {
+                    _logger.LogInformation("Região não encontrada");
                     return NotFound();
+                }
 
+                _logger.LogInformation("Construindo objeto de região...");
                 regiao.Nome = input.Nome;
                 regiao.DDD = input.DDD;
 
+                _logger.LogInformation("Atualizando região...");
                 _regiaoRepository.Atualizar(regiao);
 
+                _logger.LogInformation("Região atualizada");
                 return Ok();
             }
             catch (Exception e)
             {
+                _logger.LogError($"Erro na requisição: {e.Message}");
                 return BadRequest(e);
             }
         }
@@ -172,17 +200,24 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Obtendo região por id...");
                 var regiao = _regiaoRepository.GetById(id);
 
                 if (regiao == null)
+                {
+                    _logger.LogInformation("Região não encontrada");
                     return NotFound();
+                }
 
+                _logger.LogInformation("Excluindo região...");
                 _regiaoRepository.Excluir(id);
 
+                _logger.LogInformation("Região excluída");
                 return Ok();
             }
             catch (Exception e)
             {
+                _logger.LogError($"Erro na requisição: {e.Message}");
                 return BadRequest(e);
             }
         }
