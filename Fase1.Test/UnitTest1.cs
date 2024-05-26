@@ -1,4 +1,4 @@
-namespace Fase1.Tests
+namespace Fase1.Test
 {
     public class Tests
     {
