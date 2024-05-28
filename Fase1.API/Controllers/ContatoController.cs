@@ -13,12 +13,14 @@ namespace Fase1.API.Controllers
     public class ContatoController : ControllerBase
     {
         private readonly IContatoRepository _contatoRepository;
+        private readonly IRegiaoRepository _regiaoRepository;
         private readonly ILogger<ContatoController> _logger;
 
-        public ContatoController(IContatoRepository contatoRepository, ILogger<ContatoController> logger)
+        public ContatoController(IContatoRepository contatoRepository, ILogger<ContatoController> logger, IRegiaoRepository regiaoRepository)
         {
             _contatoRepository = contatoRepository;
             _logger = logger;
+            _regiaoRepository = regiaoRepository;
         }
 
         /// <summary>
@@ -181,6 +183,15 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Verificando se região escolhida existe...");
+                var regiao = _regiaoRepository.GetById(input.RegiaoId);
+
+                if (regiao == null)
+                {
+                    _logger.LogInformation("Região não encontrada");
+                    return BadRequest("Região não encontrada");
+                }
+
                 _logger.LogInformation("Construindo objeto de contato...");
                 var contato = new Contato()
                 {
@@ -219,6 +230,15 @@ namespace Fase1.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Verificando se região escolhida existe...");
+                var regiao = _regiaoRepository.GetById(input.RegiaoId);
+
+                if (regiao == null)
+                {
+                    _logger.LogInformation("Região não encontrada");
+                    return BadRequest("Região não encontrada");
+                }
+
                 _logger.LogInformation("Obtendo contato...");
                 var contato = _contatoRepository.GetById(input.Id);
 

@@ -105,9 +105,7 @@ namespace Fase1.Core.Entities
         /// <exception cref="DomainException"></exception>
         public static void AssertTelefoneIsValid(string telefone, string message)
         {
-            string padraoTelefone = "[0-9]{4,5}-?[0-9]{4}";
-            //string padraoTelefone = "(?[0-9]{2}?)? [0-9]{4,5}-?[0-9]{4}";
-            //string padraoTelefone = "^\\([1-9]{2}\\) (?:[2-8]|9[0-9])[0-9]{3}\\-[0-9]{4}$";
+            string padraoTelefone = "^(?:((?:9\\d|[2-9])\\d{3})\\-?(\\d{4}))$";
 
             if (!Regex.Match(telefone, padraoTelefone).Success)
                 throw new DomainException(message);
