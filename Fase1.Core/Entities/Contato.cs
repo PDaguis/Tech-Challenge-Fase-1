@@ -31,10 +31,11 @@ namespace Fase1.Core.Entities
 
         public void ValidateEntity()
         {
-            AssertionConcern.AssertArgumentNotEmpty(Nome, "O nome não pode estar vazio!");
-            AssertionConcern.AssertArgumentNotEmpty(Telefone, "O titulo não pode estar vazio!");
-            AssertionConcern.AssertArgumentNotEmpty(Email, "O email não pode estar vazio!");
-            AssertionConcern.AssertEmailIsValid(Email, "Email inválido!");
+            //AssertionConcern.AssertArgumentNotEmpty(Nome, "O nome não pode estar vazio!");
+            //AssertionConcern.AssertArgumentNotEmpty(Telefone, "O telefone não pode estar vazio!");
+            AssertionConcern.AssertTelefoneIsValid(Telefone, "O telefone não é válido!");
+            //AssertionConcern.AssertArgumentNotEmpty(Email, "O email não pode estar vazio!");
+            //AssertionConcern.AssertEmailIsValid(Email, "Email inválido!");
         }
     }
 }

@@ -81,5 +81,36 @@ namespace Fase1.Core.Entities
             if (!Regex.IsMatch(email, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
                 throw new DomainException(message);
         }
+
+        /// <summary>
+        /// Validação se o ddd é válido
+        /// </summary>
+        /// <param name="ddd"></param>
+        /// <param name="message"></param>
+        /// <exception cref="DomainException"></exception>
+        public static void AssertDDDIsValid(string ddd, string message)
+        {
+            var dddInt = int.Parse(ddd);
+            //var dddInt = int.Parse(ddd.Remove(0,1));
+
+            if (dddInt > 99 || dddInt < 11)
+                throw new DomainException(message);
+        }
+
+        /// <summary>
+        /// Validação se o telefone é válido
+        /// </summary>
+        /// <param name="ddd"></param>
+        /// <param name="message"></param>
+        /// <exception cref="DomainException"></exception>
+        public static void AssertTelefoneIsValid(string telefone, string message)
+        {
+            string padraoTelefone = "[0-9]{4,5}-?[0-9]{4}";
+            //string padraoTelefone = "(?[0-9]{2}?)? [0-9]{4,5}-?[0-9]{4}";
+            //string padraoTelefone = "^\\([1-9]{2}\\) (?:[2-8]|9[0-9])[0-9]{3}\\-[0-9]{4}$";
+
+            if (!Regex.Match(telefone, padraoTelefone).Success)
+                throw new DomainException(message);
+        }
     }
 }
