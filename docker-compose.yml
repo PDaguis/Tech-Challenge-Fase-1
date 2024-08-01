@@ -1,0 +1,39 @@
+services:
+  fase1.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release
+      - ASPNETCORE_HTTP_PORTS=3000
+      - ASPNETCORE_HTTPS_PORTS=3001
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=123
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/fase1.pfx
+    container_name: fase1.api
+    image: fase1.api
+    build:
+      context: .
+      dockerfile: ./Fase1.API/Dockerfile
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    depends_on:
+      - db.server
+        # condition: service_healthy
+
+  db.server:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: db.server
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=!Q@W3e4r**
+    volumes:
+      - 'D:\Estudos\FIAP\TechChallenge\Volumes\Database:/var/opt/mssql/data'
+
+    # healthcheck:
+    #   test: /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "!Q@W3e4r**" -Q "SELECT 1" -b -o /dev/null
+    #   interval: 10s
+    #   timeout: 3s
+    #   retries: 10
+    #   start_period: 10s

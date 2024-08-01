@@ -46,6 +46,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+using var serviceScope = app.Services.CreateScope();
+using var dbContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+dbContext?.Database.Migrate();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
