@@ -3,6 +3,7 @@ using Fase1.Core.Interfaces;
 using Fase1.Infra.Context;
 using Fase1.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Prometheus;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,6 +46,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+var counter = Metrics.CreateCounter("fase1metric", "Counts requests to the endpoints",
+    new CounterConfiguration
+    {
+        LabelNames = ["method", "endpoint"]
+    });
+
+app.Use((context, next) =>
+{
+    counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+    return next();
+});
+
+app.UseMetricServer();
+app.UseHttpMetrics();
 
 using var serviceScope = app.Services.CreateScope();
 using var dbContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
