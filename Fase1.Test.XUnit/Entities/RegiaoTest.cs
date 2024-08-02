@@ -27,7 +27,7 @@ namespace Fase1.Test.Entities
             Assert.Equal("O nome não pode estar vazio!", result.Message);
         }
 
-        [Fact(DisplayName = "Validando se o ddd da região vem vazio")]
+        [Fact(DisplayName = "Validando se o ddd da região vem vazio teste")]
         public void Should_Verify_If_DDD_Is_Empty()
         {
             var nome = _faker.Name.FirstName();
