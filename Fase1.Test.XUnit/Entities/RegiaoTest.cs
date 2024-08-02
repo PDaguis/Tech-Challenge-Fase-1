@@ -24,7 +24,7 @@ namespace Fase1.Test.Entities
             var ddd = "011";
 
             var result = Assert.Throws<DomainException>(() => new Regiao(nome, ddd));
-            Assert.Equal("O nome nao pode estar vazio!", result.Message);
+            Assert.Equal("Nome cannot be null or empty", result.Message);
         }
 
         [Fact(DisplayName = "Validando se o ddd da região vem vazio teste")]
@@ -35,7 +35,7 @@ namespace Fase1.Test.Entities
 
             var result = Assert.Throws<DomainException>(() => new Regiao(nome, ddd));
 
-            Assert.Equal("O DDD nao pode estar vazio!", result.Message);
+            Assert.Equal("DDD cannot be null or empty", result.Message);
         }
 
         [Fact(DisplayName = "Validando se o ddd da região é válido")]
@@ -46,7 +46,7 @@ namespace Fase1.Test.Entities
 
             var result = Assert.Throws<DomainException>(() => new Regiao(nome, ddd));
 
-            Assert.Equal("DDD incorreto!", result.Message);
+            Assert.Equal("DDD incorrect", result.Message);
         }
     }
 }

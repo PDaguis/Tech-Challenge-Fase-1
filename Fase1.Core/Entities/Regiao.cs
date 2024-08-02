@@ -28,9 +28,9 @@ namespace Fase1.Core.Entities
 
         public void ValidateEntity()
         {
-            AssertionConcern.AssertArgumentNotEmpty(Nome, "O nome nao pode estar vazio!");
-            AssertionConcern.AssertArgumentNotEmpty(DDD, "O DDD nao pode estar vazio!");
-            AssertionConcern.AssertDDDIsValid(DDD, "DDD incorreto!");
+            AssertionConcern.AssertArgumentNotEmpty(Nome, "Nome cannot be null or empty");
+            AssertionConcern.AssertArgumentNotEmpty(DDD, "DDD cannot be null or empty");
+            AssertionConcern.AssertDDDIsValid(DDD, "DDD incorrect");
         }
     }
 }
