@@ -21,10 +21,10 @@ namespace Fase1.Test.Entities
 
             var result = Assert.Throws<DomainException>(() => new Contato(nome, telefone, email));
 
-            Assert.Equal("O nome não pode estar vazio!", result.Message);
+            Assert.Equal("Nome cannot be null or empty", result.Message);
         }
 
-        [Fact(DisplayName = "Validando se o email do contato é válido")]
+        [Fact(DisplayName = "Validando se o email do contato ï¿½ vï¿½lido")]
         public void Should_Verify_If_Email_Is_Valid()
         {
             var nome = "Pedro";
@@ -35,10 +35,10 @@ namespace Fase1.Test.Entities
 
             var result = Assert.Throws<DomainException>(() => new Contato(nome, telefone, email));
 
-            Assert.Equal("Email inválido!", result.Message);
+            Assert.Equal("Email is invalid", result.Message);
         }
 
-        [Fact(DisplayName = "Validando se o telefone do contato é válido")]
+        [Fact(DisplayName = "Validando se o telefone do contato ï¿½ vï¿½lido")]
         public void Should_Verify_If_PhoneNumber_Is_Valid()
         {
             var nome = _faker.Name.FirstName();
@@ -47,7 +47,7 @@ namespace Fase1.Test.Entities
 
             var result = Assert.Throws<DomainException>(() => new Contato(nome, telefone, email));
 
-            Assert.Equal("O telefone não é válido!", result.Message);
+            Assert.Equal("Telefone is invalid", result.Message);
         }
     }
 }

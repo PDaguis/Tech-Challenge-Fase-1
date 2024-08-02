@@ -20,7 +20,7 @@ namespace Fase1.Core.Entities
 
         public Contato()
         {
-            
+
         }
 
         public string Nome { get; set; }
@@ -31,11 +31,11 @@ namespace Fase1.Core.Entities
 
         public void ValidateEntity()
         {
-            AssertionConcern.AssertArgumentNotEmpty(Nome, "O nome não pode estar vazio!");
-            AssertionConcern.AssertArgumentNotEmpty(Telefone, "O telefone não pode estar vazio!");
-            AssertionConcern.AssertTelefoneIsValid(Telefone, "O telefone não é válido!");
-            AssertionConcern.AssertArgumentNotEmpty(Email, "O email não pode estar vazio!");
-            AssertionConcern.AssertEmailIsValid(Email, "Email inválido!");
+            AssertionConcern.AssertArgumentNotEmpty(Nome, "Nome cannot be null or empty");
+            AssertionConcern.AssertArgumentNotEmpty(Telefone, "Telefone cannot be null or empty");
+            AssertionConcern.AssertTelefoneIsValid(Telefone, "Telefone is invalid");
+            AssertionConcern.AssertArgumentNotEmpty(Email, "Email cannot be null or empty");
+            AssertionConcern.AssertEmailIsValid(Email, "Email is invalid");
         }
     }
 }
