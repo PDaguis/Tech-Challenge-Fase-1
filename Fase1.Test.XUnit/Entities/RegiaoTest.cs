@@ -35,7 +35,7 @@ namespace Fase1.Test.Entities
 
             var result = Assert.Throws<DomainException>(() => new Regiao(nome, ddd));
 
-            Assert.Equal("O nome não pode estar vazio!", result.Message);
+            Assert.Equal("O DDD não pode estar vazio!", result.Message);
         }
 
         [Fact(DisplayName = "Validando se o ddd da região é válido")]
