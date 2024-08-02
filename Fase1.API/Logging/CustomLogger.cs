@@ -24,7 +24,7 @@ namespace Fase1.API.Logging
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
         {
-            string message = $"Log de execução {logLevel}: {eventId} - {formatter(state, exception)}";
+            string message = $"Log de execução {logLevel}: {eventId} - {formatter(state, exception)} - API Tech Challenge";
 
             Console.WriteLine(message);
         }
