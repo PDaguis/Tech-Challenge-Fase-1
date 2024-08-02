@@ -19,7 +19,7 @@ namespace Fase1.Core.Entities
 
         public Regiao()
         {
-            
+
         }
 
         public string Nome { get; set; }
@@ -28,9 +28,9 @@ namespace Fase1.Core.Entities
 
         public void ValidateEntity()
         {
-            AssertionConcern.AssertArgumentNotEmpty(Nome, "O nome não pode estar vazio!");
-            AssertionConcern.AssertArgumentNotEmpty(DDD, "O DDD não pode estar vazio!");
-            AssertionConcern.AssertDDDIsValid(DDD, "O DDD é inválido!");
+            AssertionConcern.AssertArgumentNotEmpty(Nome, "O nome nao pode estar vazio!");
+            AssertionConcern.AssertArgumentNotEmpty(DDD, "O DDD nao pode estar vazio!");
+            AssertionConcern.AssertDDDIsValid(DDD, "DDD incorreto!");
         }
     }
 }
